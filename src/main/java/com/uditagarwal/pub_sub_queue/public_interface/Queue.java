@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Queue {
-    Map<String, TopicHandler> topicProcessors;
+    private final Map<String, TopicHandler> topicProcessors;
 
     public Queue() {
         this.topicProcessors = new HashMap<>();
