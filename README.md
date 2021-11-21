@@ -4,7 +4,7 @@
 https://youtu.be/4BEzgPlLKTo
 
 ### Problem statement
-[Check here](problem-statment.md)
+[Check here](problem-statement.md)
 
 ### Project requirements
 * JDK 1.8
