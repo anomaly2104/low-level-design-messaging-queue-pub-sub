@@ -13,7 +13,7 @@ public class Main {
         final SleepingSubscriber sub2 = new SleepingSubscriber("sub2", 10000);
         queue.subscribe(sub1, topic1);
         queue.subscribe(sub2, topic1);
-
+//
         final SleepingSubscriber sub3 = new SleepingSubscriber("sub3", 5000);
         queue.subscribe(sub3, topic2);
 
