@@ -1,31 +1,33 @@
 package com.uditagarwal;
 
-import com.uditagarwal.pub_sub_queue.public_interface.Queue;
+import com.uditagarwal.pub_sub_queue.InMemoryQueue;
 import com.uditagarwal.pub_sub_queue.model.Message;
-import com.uditagarwal.pub_sub_queue.model.Topic;
+import com.uditagarwal.pub_sub_queue.public_interface.IQueue;
 
 public class Main {
+
     public static void main(String[] args) throws InterruptedException {
-        final Queue queue = new Queue();
-        final Topic topic1 = queue.createTopic("t1");
-        final Topic topic2 = queue.createTopic("t2");
-        final SleepingSubscriber sub1 = new SleepingSubscriber("sub1", 10000);
-        final SleepingSubscriber sub2 = new SleepingSubscriber("sub2", 10000);
-        queue.subscribe(sub1, topic1);
-        queue.subscribe(sub2, topic1);
-//
-        final SleepingSubscriber sub3 = new SleepingSubscriber("sub3", 5000);
-        queue.subscribe(sub3, topic2);
+        final IQueue queue = new InMemoryQueue();
+        final String topicName1 = "t1", topicName2 = "t2";
 
-        queue.publish(topic1, new Message("m1"));
-        queue.publish(topic1, new Message("m2"));
+        queue.createTopic(topicName1);
+        queue.createTopic(topicName2);
+        final DummySubscriber sub1 = new DummySubscriber("sub1", 10000);
+        final DummySubscriber sub2 = new DummySubscriber("sub2", 10000);
+        queue.addSubscriber(sub1, topicName1);
+        queue.addSubscriber(sub2, topicName1);
+        final DummySubscriber sub3 = new DummySubscriber("sub3", 5000);
+        queue.addSubscriber(sub3, topicName2);
 
-        queue.publish(topic2, new Message("m3"));
+        queue.publishMessage(topicName1, new Message("m1"));
+        queue.publishMessage(topicName1, new Message("m2"));
+
+        queue.publishMessage(topicName2, new Message("m3"));
 
         Thread.sleep(15000);
-        queue.publish(topic2, new Message("m4"));
-        queue.publish(topic1, new Message("m5"));
+        queue.publishMessage(topicName2, new Message("m4"));
+        queue.publishMessage(topicName1, new Message("m5"));
 
-        queue.resetOffset(topic1, sub1, 0);
+        queue.resetOffset(topicName1, sub1, 0);
     }
 }
