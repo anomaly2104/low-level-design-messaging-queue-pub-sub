@@ -7,5 +7,4 @@ import lombok.Getter;
 @Getter
 public class Message {
     private final String msg;
-
 }

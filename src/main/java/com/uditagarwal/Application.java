@@ -2,12 +2,15 @@ package com.uditagarwal;
 
 import com.uditagarwal.pub_sub_queue.InMemoryQueue;
 import com.uditagarwal.pub_sub_queue.model.Message;
-import com.uditagarwal.pub_sub_queue.public_interface.IQueue;
+import com.uditagarwal.pub_sub_queue.public_interface.Queue;
+import lombok.extern.slf4j.Slf4j;
 
-public class Main {
+@Slf4j
+public class Application {
 
     public static void main(String[] args) throws InterruptedException {
-        final IQueue queue = new InMemoryQueue();
+        log.info("starting application");
+        final Queue queue = new InMemoryQueue();
         final String topicName1 = "t1", topicName2 = "t2";
 
         queue.createTopic(topicName1);

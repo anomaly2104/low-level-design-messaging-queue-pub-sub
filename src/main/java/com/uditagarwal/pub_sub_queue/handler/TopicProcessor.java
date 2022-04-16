@@ -1,7 +1,8 @@
 package com.uditagarwal.pub_sub_queue.handler;
 
-import com.uditagarwal.pub_sub_queue.model.Topic;
+import com.uditagarwal.pub_sub_queue.model.InMemoryTopic;
 import com.uditagarwal.pub_sub_queue.model.TopicSubscriber;
+import com.uditagarwal.pub_sub_queue.public_interface.Topic;
 import lombok.Getter;
 import lombok.NonNull;
 

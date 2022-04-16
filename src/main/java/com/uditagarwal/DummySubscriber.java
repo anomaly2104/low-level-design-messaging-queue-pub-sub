@@ -1,11 +1,11 @@
 package com.uditagarwal;
 
-import com.uditagarwal.pub_sub_queue.public_interface.ISubscriber;
+import com.uditagarwal.pub_sub_queue.public_interface.Subscriber;
 import com.uditagarwal.pub_sub_queue.model.Message;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class DummySubscriber implements ISubscriber {
+public class DummySubscriber implements Subscriber {
     private final String id;
     private final int sleepTimeInMillis;
 
