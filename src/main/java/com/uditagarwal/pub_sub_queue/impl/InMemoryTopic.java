@@ -1,6 +1,8 @@
-package com.uditagarwal.pub_sub_queue.model;
+package com.uditagarwal.pub_sub_queue.impl;
 
-import com.uditagarwal.pub_sub_queue.public_interface.Topic;
+import com.uditagarwal.pub_sub_queue.interfaces.Subscriber;
+import com.uditagarwal.pub_sub_queue.interfaces.Topic;
+import com.uditagarwal.pub_sub_queue.models.Message;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -11,7 +13,7 @@ import java.util.List;
 public class InMemoryTopic implements Topic {
     private final String topicName; // treating topic name as identifier
     private final List<Message> messages;
-    private final List<TopicSubscriber> subscribers;
+    private final List<Subscriber> subscribers;
 
     public InMemoryTopic(@NonNull final String topicName) {
         this.topicName = topicName;
@@ -23,7 +25,7 @@ public class InMemoryTopic implements Topic {
         messages.add(message);
     }
 
-    public void addSubscriber(@NonNull final TopicSubscriber subscriber) {
+    public void addSubscriber(@NonNull final Subscriber subscriber) {
         subscribers.add(subscriber);
     }
 }

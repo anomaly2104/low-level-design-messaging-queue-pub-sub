@@ -1,8 +1,7 @@
 package com.uditagarwal.pub_sub_queue.handler;
 
-import com.uditagarwal.pub_sub_queue.model.InMemoryTopic;
-import com.uditagarwal.pub_sub_queue.model.TopicSubscriber;
-import com.uditagarwal.pub_sub_queue.public_interface.Topic;
+import com.uditagarwal.pub_sub_queue.interfaces.Subscriber;
+import com.uditagarwal.pub_sub_queue.interfaces.Topic;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -20,15 +19,15 @@ public class TopicProcessor {
     }
 
     public void publish() {
-        for (TopicSubscriber topicSubscriber:topic.getSubscribers()) {
-            startSubscriberWorker(topicSubscriber);
+        for (Subscriber subscriber : topic.getSubscribers()) {
+            startSubscriberWorker(subscriber);
         }
     }
 
-    public void startSubscriberWorker(@NonNull final TopicSubscriber topicSubscriber) {
-        final String subscriberId = topicSubscriber.getSubscriber().getId();
+    public void startSubscriberWorker(@NonNull final Subscriber subscriber) {
+        final String subscriberId = subscriber.getId();
         if (!subscriberWorkers.containsKey(subscriberId)) {
-            final SubscriberWorker subscriberWorker = new SubscriberWorker(topic, topicSubscriber);
+            final SubscriberWorker subscriberWorker = new SubscriberWorker(topic, subscriber);
             subscriberWorkers.put(subscriberId, subscriberWorker);
             new Thread(subscriberWorker).start();
         }

@@ -1,22 +1,23 @@
-package com.uditagarwal;
+package com.uditagarwal.pub_sub_queue.impl;
 
-import com.uditagarwal.pub_sub_queue.public_interface.Subscriber;
-import com.uditagarwal.pub_sub_queue.model.Message;
+import com.uditagarwal.pub_sub_queue.interfaces.Subscriber;
+import com.uditagarwal.pub_sub_queue.models.Message;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Slf4j
+@Getter
 public class DummySubscriber implements Subscriber {
     private final String id;
     private final int sleepTimeInMillis;
+    private final AtomicInteger offset;
 
     public DummySubscriber(String id, int sleepTimeInMillis) {
         this.id = id;
         this.sleepTimeInMillis = sleepTimeInMillis;
-    }
-
-    @Override
-    public String getId() {
-        return id;
+        this.offset = new AtomicInteger(0);
     }
 
     @Override
