@@ -1,4 +1,4 @@
-package com.uditagarwal.pub_sub_queue.model;
+package com.uditagarwal.pub_sub_queue.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,5 +7,4 @@ import lombok.Getter;
 @Getter
 public class Message {
     private final String msg;
-
 }
